@@ -1,0 +1,68 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(92, 92, 3);
+}
+
+.full-page {
+    width: 800px;
+    max-width: 80%;
+    background-color: purple;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+}
+
+.btn-grid {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn {
+    border: 5px solid lightblue;
+    background-color: lightblue;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.btn:hover {
+    border-color: black;
+}
+
+.btn.correct {
+    background-color: green;
+    color: black
+}
+
+.btn.wrong {
+    background-color:red;
+    color: black  
+}
+.start-btn, .next-btn {
+    font-size: 2rem;
+    font-weight: bold;
+    align-items: center;
+    margin: 5px;
+}
+
+.control-btn {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.hide {
+    display:none;
+}
