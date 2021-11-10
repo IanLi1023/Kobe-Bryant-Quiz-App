@@ -1,6 +1,7 @@
 *, *::before, *::after {
     box-sizing: border-box;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
 }
 
 body {
@@ -11,7 +12,7 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: rgb(92, 92, 3);
+    background-color: rgb(190, 190, 7);
 }
 
 .full-page {
@@ -21,6 +22,9 @@ body {
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .btn-grid {
@@ -53,7 +57,8 @@ body {
     font-size: 2rem;
     font-weight: bold;
     align-items: center;
-    margin: 5px;
+    justify-content: center;
+    margin: 10%;
 }
 
 .control-btn {
@@ -64,5 +69,5 @@ body {
 }
 
 .hide {
-    display:none;
+    display: none;
 }
