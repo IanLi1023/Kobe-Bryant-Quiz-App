@@ -17,7 +17,7 @@ function startGame() {
     startButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5)
     currentQuestionIndex = 0
-    questionBoxElement.classList.remove('hide');
+    questionBoxElement.classList.remove('hide')
     setNextQuestion()
 }
 
@@ -56,7 +56,6 @@ function selectAnswer(e) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    nextButton.classList.remove('hide')
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
     } else {
