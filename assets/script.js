@@ -3,6 +3,9 @@ const nextButton = document.getElementById('next-btn')
 const questionBoxElement = document.getElementById('question-box')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
+let interval
+let timer = 60
+let highScore
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -17,14 +20,26 @@ function startGame() {
     startButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5)
     currentQuestionIndex = 0
+    startTimer()
     questionBoxElement.classList.remove('hide')
     setNextQuestion()
+}
+
+function startTimer() {
+    interval = setInterval(() => {
+        document.getElementById('timer').textContent = timer
+        if (timer <= 0) {
+            clearInterval(interval)
+            // gameOver()
+        } else {
+            timer--
+        }
+    }, 1000);
 }
 
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
-
 }
 
 function showQuestion(question) {
@@ -39,43 +54,49 @@ function showQuestion(question) {
         button.addEventListener('click', selectAnswer)
         answerButtonsElement.appendChild(button)
     })
-
 }
 function resetState() {
     clearStatusClass(document.body)
     nextButton.classList.add('hide')
     while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild
-        (answerButtonsElement.firstChild)
+            (answerButtonsElement.firstChild)
     }
 }
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
+    if (e.target && e.target.matches('.btn')) {
+        const userAnswer = e.target.textContent
+        if (correct !== userAnswer) {
+            timer -= 10
+        }
+    }
     setStatusClass(document.body, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove('hide')
+        nextButton.classList.remove('hide')
     } else {
-      startButton.innerText = 'Restart'
-      startButton.classList.remove('hide')
+        startButton.innerText = 'Restart'
+        startButton.classList.remove('hide')
     }
+
 }
 
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
-        element.classList.add ('correct')
+        element.classList.add('correct')
     } else {
-      element.classList.add ('wrong')
+        element.classList.add('wrong')
     }
 }
 
 function clearStatusClass(element) {
     element.classList.remove('correct')
-    element.classList.remove ('wrong')
+    element.classList.remove('wrong')
 }
 
 const questions = [
@@ -94,7 +115,7 @@ const questions = [
             { text: 'Two', correct: false },
             { text: 'Five', correct: true },
             { text: 'Ten', correct: false },
-            { text: 'Six', correct: false },  
+            { text: 'Six', correct: false },
         ]
     },
     {
@@ -103,26 +124,27 @@ const questions = [
             { text: 'Charlotte Hornets', correct: false },
             { text: 'Los Angeles Lakers', correct: true },
             { text: 'Houston Rockets', correct: false },
-            { text: 'Clevland Cavaliers', correct: false },  
+            { text: 'Clevland Cavaliers', correct: false },
         ]
-    }, 
+    },
     {
         question: 'Kobe became accustomed to his new lifestyle and learned to do what?',
         answers: [
             { text: 'Work to become a pro body builder.', correct: false },
             { text: 'Become a dog trainer.', correct: false },
             { text: 'Cook.', correct: false },
-            { text: 'Speak fluent Italian.', correct: true },  
+            { text: 'Speak fluent Italian.', correct: true },
         ]
-    }, 
+    },
     {
         question: 'What was Kobe Bryant\'s first NBA Jersey number?',
         answers: [
             { text: '24', correct: false },
             { text: '45', correct: false },
             { text: '8', correct: true },
-            { text: '23', correct: false },  
+            { text: '23', correct: false },
         ]
-    }, 
-    
-]     
+    },
+
+]
+
