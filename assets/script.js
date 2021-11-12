@@ -6,6 +6,10 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 let interval
 let timer = 60
 let highScore
+// Declare variable high score
+// Assign to 0 
+// When the game is over, assign highscore=timer
+// Pass this as an object to local storage
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -30,6 +34,7 @@ function startTimer() {
         document.getElementById('timer').textContent = timer
         if (timer <= 0) {
             clearInterval(interval)
+            //create a function for gameOver()
             // gameOver()
         } else {
             timer--
@@ -63,14 +68,23 @@ function resetState() {
             (answerButtonsElement.firstChild)
     }
 }
-function selectAnswer(e) {
-    const selectedButton = e.target
-    const correct = selectedButton.dataset.correct
-    if (e.target && e.target.matches('.btn')) {
-        const userAnswer = e.target.textContent
-        if (correct !== userAnswer) {
+function selectAnswer(event) {
+    const selectedButton = event.target
+    let correct = selectedButton.dataset.correct
+    console.log (correct);
+    if (event.target && event.target.matches('.btn')) {
+        const userAnswer = event.target.textContent
+        console.log(userAnswer);
+        if (correct === undefined) {
             timer -= 10
-        }
+            if (timer > 10) {
+                timer -= 10
+            } else {
+                let temp = timer
+                timer -= temp
+            }
+        } 
+        
     }
     setStatusClass(document.body, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
