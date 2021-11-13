@@ -20,11 +20,10 @@ nextButton.addEventListener('click', () => {
 })
 
 function startGame() {
-    console.log('started')
+    startTimer()
     startButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5)
     currentQuestionIndex = 0
-    startTimer()
     questionBoxElement.classList.remove('hide')
     setNextQuestion()
 }
@@ -34,8 +33,6 @@ function startTimer() {
         document.getElementById('timer').textContent = timer
         if (timer <= 0) {
             clearInterval(interval)
-            //create a function for gameOver()
-            // gameOver()
         } else {
             timer--
         }
@@ -44,7 +41,13 @@ function startTimer() {
 
 function setNextQuestion() {
     resetState()
-    showQuestion(shuffledQuestions[currentQuestionIndex])
+    const lastQuestion = questions.length - 1
+    if (lastQuestion === currentQuestionIndex) {
+        showQuestion(shuffledQuestions[currentQuestionIndex])
+        endQuiz()
+    } else {
+        showQuestion(shuffledQuestions[currentQuestionIndex])
+    } 
 }
 
 function showQuestion(question) {
@@ -75,8 +78,8 @@ function selectAnswer(event) {
     if (event.target && event.target.matches('.btn')) {
         const userAnswer = event.target.textContent
         console.log(userAnswer);
-        if (correct === undefined) {
-            timer -= 10
+    if (correct === undefined) {
+        timer -= 10;
             if (timer > 10) {
                 timer -= 10
             } else {
@@ -111,6 +114,11 @@ function setStatusClass(element, correct) {
 function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
+}
+
+function endQuiz() {
+    clearInterval(interval)
+    document.location.replace("/assets/endQuiz.html")
 }
 
 const questions = [
@@ -161,4 +169,3 @@ const questions = [
     },
 
 ]
-
