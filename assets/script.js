@@ -118,7 +118,7 @@ function clearStatusClass(element) {
 
 function endQuiz() {
     clearInterval(interval)
-    document.location.replace("/assets/endQuiz.html")
+    document.location.replace("endQuiz.html")
 }
 
 const questions = [
