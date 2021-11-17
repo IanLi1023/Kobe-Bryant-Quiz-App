@@ -8,15 +8,34 @@
 </head>
 <body>
     <h1>High Score Entry</h1>
+
+    <div>
+        Final Score is: <span id='score-place-holder'></span> points
+    </div>
+    <div>Final Time is: <span id='time-place-holder'></span> seconds </div>
+     <br>
+     <br>
+
     <form name="High-Score-Entry">
-        <label for="Name">Enter your intials here: </label>
-        <input type="Text" name="Name" id=""/>
+        <label for="Name">Enter your initials here: </label>
+        <input type="Text" name="Name" id="Name"/>
     </form>
+
+    <br>
+    <br>
 
     <div class="control-btn">
         <button id="submit-btn" class="submit-btn btn">Submit</button>
         <button id="restart-btn" class="restart-btn btn">Restart Quiz</button>
     </div>
-    <script src="./script.js"></script>
+
+    <div>
+        <h2>High Scores</h2>
+        <div id='high-scores-table'></div>
+    </div>
+
+   
+    <script src="./assets/endQuizScript.js"></script>
+
 </body>
 </html>

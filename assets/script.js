@@ -3,13 +3,11 @@ const nextButton = document.getElementById('next-btn')
 const questionBoxElement = document.getElementById('question-box')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
+
 let interval
 let timer = 60
-let highScore
-// Declare variable high score
-// Assign to 0 
-// When the game is over, assign highscore=timer
-// Pass this as an object to local storage
+let score = 0
+let myStorage = window.localStorage
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -19,7 +17,9 @@ nextButton.addEventListener('click', () => {
     setNextQuestion()
 })
 
+
 function startGame() {
+    myStorage.setItem('isSet', JSON.stringify(false))
     startTimer()
     startButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5)
@@ -57,6 +57,7 @@ function showQuestion(question) {
         button.innerText = answer.text
         button.classList.add('btn')
         if (answer.correct) {
+            score++
             button.dataset.correct = answer.correct
         }
         button.addEventListener('click', selectAnswer)
@@ -79,7 +80,7 @@ function selectAnswer(event) {
         const userAnswer = event.target.textContent
         console.log(userAnswer);
     if (correct === undefined) {
-        timer -= 10;
+        // timer -= 10;
             if (timer > 10) {
                 timer -= 10
             } else {
@@ -118,6 +119,8 @@ function clearStatusClass(element) {
 
 function endQuiz() {
     clearInterval(interval)
+    localStorage.setItem('score', score);
+    localStorage.setItem('time', 60-timer);
     document.location.replace("endQuiz.html")
 }
 
