@@ -3,7 +3,7 @@ const restartQuizButton = document.getElementById('restart-btn')
 const myStorage = window.localStorage;
 const score = localStorage.getItem('score');
 const time = localStorage.getItem('time');
-const highScoresTable = document.getElementById('high-score-table');
+const highScoresTable = document.getElementById('high-scores-table');
 let highScores = new Array();
 
 submitHighScoreButton.addEventListener('click', submitScore)
@@ -35,7 +35,8 @@ function submitScore() {
     highScores.push(highscore)
     myStorage.setItem('isSet', JSON.stringify(true))
     myStorage.setItem('HighScores', JSON.stringify(highScores))
-    console.log (highScores)
+    highScores.sort(compareScores)
+    createHighScoreTable()
 }
 
 function replacePlaceHolders() {
@@ -49,18 +50,40 @@ function setupHighScores() {
     } {
         let str = myStorage.getItem('HighScores')
     highScores = JSON.parse(str)
+    highScores.sort(compareScores)
 
     if (myStorage.getItem('isSet') == null)
     {myStorage.setItem('isSet', JSON.stringify(false)) }
     } 
+    createHighScoreTable()
 }
 
 function createHighScoreTable() {
-let row = document.createElement('div')
-row.innerHTML = score
-highScoresTable.appendChild(row)
+    highScoresTable.innerHTML = ''
+highScores.forEach(highscore => {
+    let row = document.createElement('div')
+row.innerHTML = highscore.initials + ': ' + highscore.score + ': ' + highscore.time 
+highScoresTable.appendChild(row) 
+});
+
 }
 
 function restartQuiz() {
     document.location.replace("index.html")
 }
+
+function compareScores(a,b) {
+    if (a.score > b.score) {
+        return a.score - b.score
+    } else if (a.score < b.score) {
+        return b.score - a.score   
+    } else if (a.time < b.time) {
+        return a.time - b.time
+    } else if (a.time > b.time) {
+        return b.time - a.time
+    } else {
+        return 0
+    }    
+}
+
+    
