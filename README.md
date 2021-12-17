@@ -1,6 +1,7 @@
 # Kobe-Bryant-Quiz-App
-## Developed by:
-Ian Li
+
+## Creator
+Ian Li (Ian.Li1023@gmail.com)
 
 # Description
 A timed quiz on Kobe Bryant's career.  It includes multiple-choice questions that will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript.
